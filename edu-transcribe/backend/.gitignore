@@ -1,6 +1,6 @@
 # Environment and secret files
 .env
-config/firebase-service.json
+./config/firebase-service.json
 
 # Firebase credentials folder
 config/
