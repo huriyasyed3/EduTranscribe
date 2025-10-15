@@ -19,10 +19,29 @@ edu_agent = Agent(
 )
 
 
-async def run_edu_agent(prompt_input: str):
- # prompt_input might include video URL, target language, etc.
-      result = await Runner.run(edu_agent , prompt_input)
-      return print(result.final_output)
-      print("hello")
+# async def run_edu_agent(prompt_input: str):
+#  # prompt_input might include video URL, target language, etc.
+#       result = await Runner.run(edu_agent , prompt_input)
+#       return print(result.final_output)
+#       print("hello")
 
-asyncio.run(run_edu_agent("https://youtu.be/vD0E3EUb8-8?si=ED0wc52vVx1OGkw1"))
+# asyncio.run(run_edu_agent("https://youtu.be/vD0E3EUb8-8?si=ED0wc52vVx1OGkw1"))
+
+
+
+async def run_edu_agent(video_url, language):
+    # your AI logic here
+    response = openai.responses.create(
+        model="gpt-4.1",
+        input=f"Transcribe and translate the lecture at {video_url} into {language}, then summarize key points."
+    )
+
+    # Convert AI output into a structured dictionary
+    result = {
+        "transcription": response.output_text,
+        "translation": response.output_text,  # for now same, later language-specific
+        "notes": "AI generated notes here",
+        "summary": "AI generated summary here"
+    }
+
+    return result   # ← make sure this line exists

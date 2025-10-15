@@ -4,8 +4,9 @@ from services.firebase_service import store_results
 
 async def process_lecture(audio_url: str, target_lang: str, user_id: str):
     # Prepare prompt input
-    prompt_input = f"Audio URL: {audio_url}\nTarget language: {target_lang}\n"
-    result = await run_edu_agent(prompt_input)
+    prompt_input = f"Audio URL: {audio_url}\n"
+    lang = f"Target language: {target_lang}\n"
+    result = await run_edu_agent(prompt_input,lang)
     # result expected JSON with transcription, translation, notes, audio_url
     # Store in Firebase
     await store_results(user_id, result)
