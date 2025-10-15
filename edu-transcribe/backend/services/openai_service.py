@@ -1,9 +1,11 @@
 from agents import Agent , Runner
 from dotenv import load_dotenv
 from openai import OpenAI
+import asyncio
+import os
 load_dotenv()
 
-openai = OpenAI()
+openai = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 edu_agent = Agent(
     name = "EduTranscribeAgent",
     instructions="""
@@ -20,4 +22,7 @@ edu_agent = Agent(
 async def run_edu_agent(prompt_input: str):
  # prompt_input might include video URL, target language, etc.
       result = await Runner.run(edu_agent , prompt_input)
-      return result.final_output
+      return print(result.final_output)
+      print("hello")
+
+asyncio.run(run_edu_agent("https://youtu.be/vD0E3EUb8-8?si=ED0wc52vVx1OGkw1"))
